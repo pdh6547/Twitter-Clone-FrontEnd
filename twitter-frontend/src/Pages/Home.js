@@ -1,8 +1,19 @@
 import React from 'react'
+import Divider from '@material-ui/core/Divider/Divider'
+import Tweet from '../components/Tweet'
 
 function Home() {
+    const style = {
+        fontSize: '20px',
+        fontWeight: 'bold'
+    }
     return (
-        <p>Home</p>
+        <div>
+            <p style={style}>홈</p>
+            <Divider />
+            <Tweet />
+            <Tweet />
+        </div>
     );
 }
 
