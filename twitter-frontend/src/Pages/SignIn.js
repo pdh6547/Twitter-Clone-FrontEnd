@@ -1,36 +1,3 @@
-// import React from 'react'
-// import TextField from '@material-ui/core/TextField';
-// import { Button } from '@material-ui/core';
-
-
-
-// function SignIn() {
-//     const style = {
-//         float: 'left',
-//         width: '100%',
-//         height: '100vh',
-//         backgroundColor: 'skyblue'
-//     }
-//     const inStyle = {
-//         margin: '0 auto',
-//         display: 'center',
-//         width: '50%',
-//         height: '50vh'
-//     }
-//     return (
-//         <div>
-//             <div style={style}>
-//                 <div style={inStyle}>
-//                     <TextField style = {{margin: '10px' }} label="Id" />
-//                     <TextField style = {{margin: '10px' }} type="password" label="Password" />
-//                     <Button style = {{margin: '10px', weight: '32px' }}> Login </Button>
-//                 </div>
-//             </div>
-//         </div>
-//     );
-// }
-
-// export default SignIn;
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
@@ -41,7 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React from 'react';
+import React, {useState} from 'react';
+import axios from 'axios'
 
 
 const useStyles = makeStyles(theme => ({
@@ -66,6 +34,35 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [inputs, setInputs] = useState({
+    email: '',
+    password: '',
+  });
+
+  const onChange = (e) => {
+    const {value, name} = e.target
+    setInputs({
+      ...inputs,
+      [name] : value
+    })
+    console.log(inputs)
+  }
+
+  const tryLogin = async() => {
+    console.log(inputs)
+    // await axios.post("http://localhost:8080/api/users/login", inputs)
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/api/users/login',
+      body: inputs
+    })
+    .then(function (response){
+      console.log(response)
+    })
+    .catch(function (error){
+      console.log(error)
+    })
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -88,6 +85,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
+            onChange = {onChange}
           />
           <TextField
             variant="outlined"
@@ -99,9 +97,10 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            onChange = {onChange}
           />
           <Button
-            href="/main/home"
+            onClick = {tryLogin}
             type="submit"
             fullWidth
             variant="contained"
