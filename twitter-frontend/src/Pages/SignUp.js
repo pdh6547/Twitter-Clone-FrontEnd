@@ -8,7 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,6 +34,25 @@ const useStyles = makeStyles(theme => ({
 
 export default function SignUp() {
   const classes = useStyles();
+  const tryRegistration = async () => {
+    await axios.post("http://localhost:8080/api/users", inputs)
+  }
+  const [inputs, setInputs] = useState({
+    username: '',
+    nickname: '',
+    email: '',
+    password: '',
+    roles: ['USER']
+  })
+
+  const onChange = (e) => {
+    const { value, name } = e.target
+    setInputs({
+      ...inputs,
+      [name]: value
+    })
+    console.log(inputs)
+  }
 
   return (
     <Container component="main" maxWidth="xs">
@@ -51,10 +71,33 @@ export default function SignUp() {
                 variant="outlined"
                 required
                 fullWidth
+                id="username"
+                label="UserName"
+                name="username"
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="nickname"
+                label="NickName"
+                name="nickname"
+                onChange={onChange}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
                 id="email"
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                onChange={onChange}
               />
             </Grid>
             <Grid item xs={12}>
@@ -66,13 +109,13 @@ export default function SignUp() {
                 label="Password"
                 type="password"
                 id="password"
+                onChange={onChange}
                 autoComplete="current-password"
               />
             </Grid>
           </Grid>
           <Button
-            href = "/signin"
-            type="submit"
+            onClick={tryRegistration}
             fullWidth
             variant="contained"
             color="primary"
