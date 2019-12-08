@@ -1,6 +1,6 @@
 import React from 'react'
 import Divider from '@material-ui/core/Divider/Divider'
-import Tweet from '../components/Tweet'
+import Tweet from '../Components/Tweet'
 
 function Home() {
     const style = {
