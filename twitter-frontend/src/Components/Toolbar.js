@@ -12,7 +12,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const drawerWidth = 200;
-const smallDrawerWidth = 80;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,19 +22,12 @@ const useStyles = makeStyles(theme => ({
       width: drawerWidth,
       flexShrink: 0,
     },
-    [theme.breakpoints.down('xs')]: {
-      width: smallDrawerWidth,
-      flexShrink: 0,
-    }
   },
   toolbar: {
     marginTop: '50px'
   },
   drawerPaper: {
     width: drawerWidth,
-  },
-  smallDrawerPaper: {
-    width: smallDrawerWidth,
   },
 }));
 
@@ -45,34 +37,17 @@ function Toolbar() {
     margin: '0 auto',
     width: '70%'
   }
-  const smallDrawer = (
-    <div>
-      <div className={classes.toolbar} />
-      <List>
-        <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
-          <ListItem button key='Home'>
-            <ListItemIcon><HomeIcon /></ListItemIcon>
-          </ListItem>
-        </Link>
-        <Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}>
-          <ListItem button key='Profile'>
-            <ListItemIcon><UserIcon /></ListItemIcon>
-          </ListItem>
-        </Link>
-      </List>
-    </div>
-  );
   const drawer = (
     <div>
       <div className={classes.toolbar} />
       <List>
-        <Link to="/home" style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to="/main/home" style={{ textDecoration: 'none', color: 'black' }}>
           <ListItem button key='홈'>
             <ListItemIcon><HomeIcon /></ListItemIcon>
             <ListItemText primary='홈' />
           </ListItem>
         </Link>
-        <Link to="/profile" style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to="/main/profile" style={{ textDecoration: 'none', color: 'black' }}>
           <ListItem button key='프로필'>
             <ListItemIcon><UserIcon /></ListItemIcon>
             <ListItemText primary='프로필' />
@@ -86,17 +61,6 @@ function Toolbar() {
     <div className={classes.root} style={style}>
       <CssBaseline />
       <nav className={classes.drawer} aria-label="mailbox folders">
-        <Hidden sm implementation="css">
-          <Drawer
-            classes={{
-              paper: classes.smallDrawerPaper,
-            }}
-            variant="permanent"
-            open
-          >
-            {smallDrawer}
-          </Drawer>
-        </Hidden>
         <Hidden xsDown implementation="css" >
           <Drawer
             classes={{

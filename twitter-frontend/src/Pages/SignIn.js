@@ -8,8 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import React, {useState} from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import React, { useState } from 'react';
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn() {
+export default function SignIn({history}) {
   const classes = useStyles();
   const [inputs, setInputs] = useState({
     email: '',
@@ -40,28 +40,23 @@ export default function SignIn() {
   });
 
   const onChange = (e) => {
-    const {value, name} = e.target
+    const { value, name } = e.target
     setInputs({
       ...inputs,
-      [name] : value
+      [name]: value
     })
     console.log(inputs)
   }
 
-  const tryLogin = async() => {
+  const tryLogin = async () => {
     console.log(inputs)
-    // await axios.post("http://localhost:8080/api/users/login", inputs)
-    axios({
-      method: 'post',
-      url: 'http://localhost:8080/api/users/login',
-      body: inputs
-    })
-    .then(function (response){
-      console.log(response)
-    })
-    .catch(function (error){
-      console.log(error)
-    })
+    await axios.post("http://localhost:8080/api/users/login", inputs)
+      .then(function (response) {
+        history.push("/main/home")
+        console.log(response)
+      })
+      .then(
+      )
   }
 
   return (
@@ -85,7 +80,7 @@ export default function SignIn() {
             name="email"
             autoComplete="email"
             autoFocus
-            onChange = {onChange}
+            onChange={onChange}
           />
           <TextField
             variant="outlined"
@@ -97,11 +92,11 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
-            onChange = {onChange}
+            onChange={onChange}
           />
           <Button
-            onClick = {tryLogin}
-            type="submit"
+            onClick={tryLogin}
+            type= "button"
             fullWidth
             variant="contained"
             color="primary"

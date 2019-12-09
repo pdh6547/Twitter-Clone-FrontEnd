@@ -8,13 +8,13 @@ import SignIn from './Pages/SignIn'
 import Toolbar from './Components/Toolbar'
 
 const drawerWidth = 200;
-const smallDrawerWidth = 80;
 
 function App() {
   const style = {
     marginLeft: drawerWidth + 10,
     width: '70%'
   }
+
   const MainContainer = () => (
     <div>
       <Toolbar />
