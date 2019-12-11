@@ -3,6 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import UserIcon from '@material-ui/icons/AccountCircle';
 import axios from 'axios';
 import React, { useState } from 'react';
+import {useDispatch} from 'react-redux'
+import { postTweetRedirect } from '../modules/redirect'
+import { getTweets } from './tweets'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -21,6 +24,7 @@ const useStyles = makeStyles(theme => ({
 export default function AddTweet() {
     const classes = useStyles()
     const token = localStorage.token
+    const dispatch = useDispatch()
     const [inputs, setInputs] = useState({
         content: '',
     })
@@ -30,7 +34,6 @@ export default function AddTweet() {
             ...inputs,
             [name]: value
         })
-        console.log(inputs)
     }
     const addTweet = async () => {
 
@@ -41,9 +44,9 @@ export default function AddTweet() {
                     Authorization: 'Bearer ' + token
                 }
             }).then(
-                
+                dispatch(getTweets()),
+                dispatch(postTweetRedirect())
             )
-        console.log(token)
     }
     const iconStyle = {
         float: 'left',

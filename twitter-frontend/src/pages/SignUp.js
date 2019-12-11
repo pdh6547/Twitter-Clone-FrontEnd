@@ -10,7 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import axios from 'axios';
 import React, { useState } from 'react';
-
+import {signUpRedirect} from '../modules/redirect'
+import {useDispatch} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -32,12 +33,13 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignUp({ history }) {
+export default function SignUp() {
   const classes = useStyles();
+  const dispatch = useDispatch()
   const tryRegistration = async () => {
     await axios.post("http://localhost:8080/api/users", inputs)
       .then(function () {
-        history.push("/signin")
+        dispatch(signUpRedirect())
       })
   }
   const [inputs, setInputs] = useState({

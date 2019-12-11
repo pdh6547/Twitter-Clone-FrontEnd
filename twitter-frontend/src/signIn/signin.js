@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {postSignIn} from '../modules/redirect'
+
 //액션 타입 생성
 const SET_JWT = 'signin/SET_JWT'
 
@@ -9,7 +11,8 @@ const initialState = {
 }
 
 
-export const userLogin = async (user, onSetJwt, {history}) => {
+export const userLogin = async(user, onSetJwt, dispatch) => {
+    
     await axios.post("http://localhost:8080/api/users/login", user,
     {
         headers:
@@ -20,7 +23,8 @@ export const userLogin = async (user, onSetJwt, {history}) => {
         .then(function (response) {
             onSetJwt({ token: response.data })
             localStorage.setItem("token", response.data)
-            history.push("/main/home")
+            dispatch(postSignIn())
+            
         })
         .catch(function (error) {
             console.log(error)

@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { userLogin } from '../signIn/signin';
+import {useDispatch} from 'react-redux'
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,6 +34,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SignIn({onSetJwt, history}) {
+  const dispatch = useDispatch()
   const classes = useStyles();
   const [inputs, setInputs] = useState({
     email: '',
@@ -49,7 +51,7 @@ export default function SignIn({onSetJwt, history}) {
 
   const handleSubmit = event => {
     event.preventDefault()
-    userLogin(inputs, onSetJwt, {history})
+    userLogin(inputs, onSetJwt, dispatch)
   }
 
   return (

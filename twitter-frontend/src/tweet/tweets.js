@@ -5,6 +5,9 @@ import axios from "axios"
 const GET_TWEETS = 'tweets/GET_TWEETS'
 const GET_TWEETS_SUCCESS = 'tweets/GET_TWEETS_SUCCESS'
 const GET_TWEETS_ERROR = 'tweets/GET_TWEETS_ERROR'
+// const POST_TWEET = 'tweet/POST_TWEET'
+// const POST_TWEET_SUCCESS = 'tweet/POST_TWEET_SUCCESS'
+// const POST_TWEET_ERROR = 'tweet/POST_TWEET_ERROR'
 
 export const getTweets = () => async dispatch => {
     const token = localStorage.token
@@ -22,6 +25,23 @@ export const getTweets = () => async dispatch => {
         dispatch({ type: GET_TWEETS_ERROR, error: e })
     }
 }
+
+// export const postTweet = inputs => async dispatch => {
+//     const token = localStorage.token
+//     dispatch({type: POST_TWEET})
+//     try {
+//         await axios.post("http://localhost:8080/api/tweets", inputs,
+//             {
+//                 headers:
+//                 {
+//                     Authorization: 'Bearer ' + token
+//                 }
+//             })
+//             dispatch({type: POST_TWEET_SUCCESS, tweet})
+//     } catch(e) {
+//         dispatch({type: POST_TWEET_ERROR, error: e})
+//     }
+// }
 
 const initialState = {
     tweets: {
