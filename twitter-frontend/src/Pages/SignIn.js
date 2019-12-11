@@ -8,8 +8,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import axios from 'axios';
 import React, { useState } from 'react';
+import { userLogin } from '../signIn/signin';
 
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn({history}) {
+export default function SignIn({onSetJwt, history}) {
   const classes = useStyles();
   const [inputs, setInputs] = useState({
     email: '',
@@ -45,18 +45,11 @@ export default function SignIn({history}) {
       ...inputs,
       [name]: value
     })
-    console.log(inputs)
   }
 
-  const tryLogin = async () => {
-    console.log(inputs)
-    await axios.post("http://localhost:8080/api/users/login", inputs)
-      .then(function (response) {
-        history.push("/main/home")
-        console.log(response)
-      })
-      .then(
-      )
+  const handleSubmit = event => {
+    event.preventDefault()
+    userLogin(inputs, onSetJwt, {history})
   }
 
   return (
@@ -95,8 +88,8 @@ export default function SignIn({history}) {
             onChange={onChange}
           />
           <Button
-            onClick={tryLogin}
-            type= "button"
+            onClick={handleSubmit}
+            type="button"
             fullWidth
             variant="contained"
             color="primary"

@@ -1,7 +1,7 @@
-import React from 'react'
 import Divider from '@material-ui/core/Divider/Divider'
-import Tweet from '../Components/Tweet/Tweet'
-import AddTweet from '../Components/Tweet/AddTweet'
+import React from 'react'
+import AddTweet from '../tweet/AddTweet'
+import TweetListContainer from '../tweet/TweetListContainer'
 
 function Home() {
     const style = {
@@ -13,8 +13,9 @@ function Home() {
             <p style={style}>홈</p>
             <Divider />
             <AddTweet />
-            <Tweet />
-            <Tweet />
+            <div>
+                <TweetListContainer />
+            </div>
         </div>
     );
 }

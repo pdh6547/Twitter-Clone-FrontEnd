@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
-import Home from './Pages/Home';
-import Profile from './Pages/Profile';
-import SignUp from './Pages/SignUp';
-import SignIn from './Pages/SignIn'
-import Toolbar from './Components/Toolbar'
+import Home from './pages/Home';
+import Profile from './pages/Profile';
+import SignUp from './pages/SignUp';
+import SignInContainer from './signIn/SignInContainer'
+import Toolbar from './components/Toolbar'
 
 const drawerWidth = 200;
 
@@ -14,7 +14,6 @@ function App() {
     marginLeft: drawerWidth + 10,
     width: '70%'
   }
-
   const MainContainer = () => (
     <div>
       <Toolbar />
@@ -27,7 +26,7 @@ function App() {
 
   const LoginContainer = () => (
     <div>
-      <Route path="/signin" component={SignIn} />
+      <Route path="/signin" component={SignInContainer} />
       <Route path="/signup" component={SignUp} />
     </div>
   )
