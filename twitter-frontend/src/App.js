@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
 import './App.css';
-import Home from './pages/Home';
-import Profile from './pages/Profile';
-import SignUp from './pages/SignUp';
+import Home from './page/Home';
+import Profile from './page/Profile';
+import SignUp from './page/SignUp';
 import SignInContainer from './signIn/SignInContainer'
-import Toolbar from './components/Toolbar'
+import Toolbar from './component/Toolbar'
 
 const drawerWidth = 200;
 

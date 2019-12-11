@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setJwt } from './signin';
-import SignIn from '../pages/SignIn';
+import SignIn from '../page/SignIn';
 
 function SignInContainer () {
     // const token = useSelector(state =>state.signin.token);
