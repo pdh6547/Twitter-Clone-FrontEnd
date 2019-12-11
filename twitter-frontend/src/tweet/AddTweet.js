@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import UserIcon from '@material-ui/icons/AccountCircle';
 import axios from 'axios';
 import React, { useState } from 'react';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { postTweetRedirect } from '../modules/redirect'
 import { getTweets } from './tweets'
 
@@ -35,18 +35,19 @@ export default function AddTweet() {
             [name]: value
         })
     }
-    const addTweet = async () => {
-
-        await axios.post("http://localhost:8080/api/tweets", inputs,
-            {
-                headers:
+    const addTweet = async (e) => {
+        if (e.keyCode === 13 || e.button === 0) {
+            await axios.post("http://localhost:8080/api/tweets", inputs,
                 {
-                    Authorization: 'Bearer ' + token
-                }
-            }).then(
-                dispatch(getTweets()),
-                dispatch(postTweetRedirect())
-            )
+                    headers:
+                    {
+                        Authorization: 'Bearer ' + token
+                    }
+                }).then(
+                    dispatch(getTweets()),
+                    dispatch(postTweetRedirect())
+                )
+        }
     }
     const iconStyle = {
         float: 'left',
@@ -61,7 +62,7 @@ export default function AddTweet() {
 
     return (
         <div className={classes.paper} >
-            <form className={classes.form} noValidate>
+            <div className={classes.form} noValidate>
                 <div style={iconStyle}>
                     <UserIcon color="disabled" style={{ fontSize: 50 }} />
                 </div>
@@ -76,19 +77,19 @@ export default function AddTweet() {
                         name="content"
                         autoFocus
                         onChange={onChange}
+                        onKeyDown={addTweet}
                     />
                     <Button
+                        type='button'
                         fullWidth
                         variant="contained"
-                        color="primary"
                         className={classes.button}
                         onClick={addTweet}
                     >
                         트윗
                 </Button>
                 </div>
-
-            </form>
+            </div>
         </div>
     );
 }

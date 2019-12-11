@@ -6,7 +6,8 @@ import TweetListContainer from '../tweet/TweetListContainer'
 function Home() {
     const style = {
         fontSize: '20px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginLeft: '10px'
     }
     return (
         <div>

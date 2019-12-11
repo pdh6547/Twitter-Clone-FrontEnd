@@ -10,8 +10,8 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import axios from 'axios';
 import React, { useState } from 'react';
-import {signUpRedirect} from '../modules/redirect'
-import {useDispatch} from 'react-redux'
+import { signUpRedirect } from '../modules/redirect'
+import { useDispatch } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -36,11 +36,15 @@ const useStyles = makeStyles(theme => ({
 export default function SignUp() {
   const classes = useStyles();
   const dispatch = useDispatch()
-  const tryRegistration = async () => {
-    await axios.post("http://localhost:8080/api/users", inputs)
-      .then(function () {
-        dispatch(signUpRedirect())
-      })
+
+
+  const tryRegistration = async (e) => {
+    if (e.keyCode === 13 || e.button === 0) {
+      await axios.post("http://localhost:8080/api/users", inputs)
+        .then(function () {
+          dispatch(signUpRedirect())
+        })
+    }
   }
   const [inputs, setInputs] = useState({
     username: '',
@@ -56,7 +60,6 @@ export default function SignUp() {
       ...inputs,
       [name]: value
     })
-    console.log(inputs)
   }
 
   return (
@@ -71,7 +74,7 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -92,7 +95,7 @@ export default function SignUp() {
                 name="nickname"
                 onChange={onChange}
               />
-            </Grid>
+            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -116,6 +119,7 @@ export default function SignUp() {
                 id="password"
                 onChange={onChange}
                 autoComplete="current-password"
+                onKeyDown={tryRegistration}
               />
             </Grid>
           </Grid>

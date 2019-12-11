@@ -10,7 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import React, { useState } from 'react';
 import { userLogin } from '../signIn/signin';
-import {useDispatch} from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 
 const useStyles = makeStyles(theme => ({
@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function SignIn({onSetJwt, history}) {
+export default function SignIn({ onSetJwt, history }) {
   const dispatch = useDispatch()
   const classes = useStyles();
   const [inputs, setInputs] = useState({
@@ -49,9 +49,11 @@ export default function SignIn({onSetJwt, history}) {
     })
   }
 
-  const handleSubmit = event => {
-    event.preventDefault()
-    userLogin(inputs, onSetJwt, dispatch)
+  const handleSubmit = e => {
+    if (e.keyCode === 13 || e.button === 0) {
+      e.preventDefault()
+      userLogin(inputs, onSetJwt, dispatch)
+    }
   }
 
   return (
@@ -88,6 +90,7 @@ export default function SignIn({onSetJwt, history}) {
             id="password"
             autoComplete="current-password"
             onChange={onChange}
+            onKeyDown={handleSubmit}
           />
           <Button
             onClick={handleSubmit}

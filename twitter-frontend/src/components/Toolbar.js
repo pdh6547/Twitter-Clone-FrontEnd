@@ -10,6 +10,7 @@ import UserIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@material-ui/core';
 
 const drawerWidth = 200;
 
@@ -37,6 +38,13 @@ function Toolbar() {
     margin: '0 auto',
     width: '70%'
   }
+
+  const logoutClick = () => {
+    console.log(localStorage.getItem('token'))
+    localStorage.removeItem('token')
+    console.log(localStorage.getItem('token'))
+  }
+
   const drawer = (
     <div>
       <div className={classes.toolbar} />
@@ -53,6 +61,18 @@ function Toolbar() {
             <ListItemText primary='프로필' />
           </ListItem>
         </Link>
+        <div style={{textAlign:'center'}}>
+          <Link to="/signin" style={{ textDecoration: 'none', color: 'black' }}>
+            <Button
+              type='button'
+              variant="contained"
+              className={classes.button}
+              onClick={logoutClick}
+            >
+              LOGOUT
+          </Button>
+          </Link>
+        </div>
       </List>
     </div>
   );
