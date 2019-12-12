@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: '100%',
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -74,7 +74,7 @@ export default function SignUp() {
         </Typography>
         <form className={classes.form} noValidate>
           <Grid container spacing={2}>
-            {/* <Grid item xs={12}>
+            <Grid item xs={12}>
               <TextField
                 variant="outlined"
                 required
@@ -95,7 +95,7 @@ export default function SignUp() {
                 name="nickname"
                 onChange={onChange}
               />
-            </Grid> */}
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 variant="outlined"

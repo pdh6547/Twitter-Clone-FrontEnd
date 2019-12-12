@@ -21,7 +21,6 @@ const store = createStore(
             ReduxThunk.withExtraArgument({history: customHistory}), 
             logger))
 )
-console.log(store.getState())
 
 ReactDOM.render(
     <Router history={customHistory}>

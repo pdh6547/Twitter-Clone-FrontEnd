@@ -4,7 +4,7 @@ import UserIcon from '@material-ui/icons/AccountCircle';
 import axios from 'axios';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
-import { postTweetRedirect } from '../modules/redirect'
+import { tweetRedirect } from '../modules/redirect'
 import { getTweets } from './tweets'
 
 const useStyles = makeStyles(theme => ({
@@ -44,8 +44,12 @@ export default function AddTweet() {
                         Authorization: 'Bearer ' + token
                     }
                 }).then(
-                    dispatch(getTweets()),
-                    dispatch(postTweetRedirect())
+                    setTimeout(
+                        function () {
+                            dispatch(getTweets())
+                        }, 500
+                    ),
+                    dispatch(tweetRedirect())
                 )
         }
     }
@@ -83,10 +87,11 @@ export default function AddTweet() {
                         type='button'
                         fullWidth
                         variant="contained"
+                        color="primary"
                         className={classes.button}
                         onClick={addTweet}
                     >
-                        트윗
+                        TWEET
                 </Button>
                 </div>
             </div>

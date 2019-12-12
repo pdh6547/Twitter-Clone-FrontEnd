@@ -1,3 +1,4 @@
+import { Button } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
@@ -10,7 +11,6 @@ import UserIcon from '@material-ui/icons/AccountCircle';
 import HomeIcon from '@material-ui/icons/Home';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from '@material-ui/core';
 
 const drawerWidth = 200;
 
@@ -25,7 +25,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   toolbar: {
-    marginTop: '50px'
+    marginTop: '50px',
   },
   drawerPaper: {
     width: drawerWidth,
@@ -40,9 +40,7 @@ function Toolbar() {
   }
 
   const logoutClick = () => {
-    console.log(localStorage.getItem('token'))
     localStorage.removeItem('token')
-    console.log(localStorage.getItem('token'))
   }
 
   const drawer = (
@@ -55,22 +53,23 @@ function Toolbar() {
             <ListItemText primary='홈' />
           </ListItem>
         </Link>
-        <Link to="/main/profile" style={{ textDecoration: 'none', color: 'black' }}>
+        <Link to="/main/profile" style={{ textDecoration: 'none', color: 'black'}}>
           <ListItem button key='프로필'>
             <ListItemIcon><UserIcon /></ListItemIcon>
             <ListItemText primary='프로필' />
           </ListItem>
         </Link>
-        <div style={{textAlign:'center'}}>
+        <div style={{ textAlign: 'center'}}>
           <Link to="/signin" style={{ textDecoration: 'none', color: 'black' }}>
             <Button
               type='button'
               variant="contained"
+              color='primary'
               className={classes.button}
               onClick={logoutClick}
             >
               LOGOUT
-          </Button>
+            </Button>
           </Link>
         </div>
       </List>

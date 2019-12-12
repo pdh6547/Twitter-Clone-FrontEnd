@@ -4,6 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import UserIcon from '@material-ui/icons/AccountCircle';
 import DeleteTweet from './DeleteTweet'
+import EditTweet from './EditTweet'
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -44,21 +45,22 @@ function TweetList({ tweets }) {
                     </div>
                     <div style={contentStyle}>
                         <Typography component="h3">
-                            {tweet.id}
+                            {tweet.authorEmail}
                         </Typography>
                         <Typography component="p">
                             {tweet.content}
                         </Typography>
                     </div>
                     <div style={buttonStyle}>
-                        {/* <DeleteTweet
-                            key={tweet.id}
-                            id={tweet.id}
-                        /> */}
-                        <DeleteTweet
-                            key={tweet.id}
-                            id={tweet.id}
-                        />
+                        {localStorage.email === tweet.authorEmail ?
+                            <div>
+                                <EditTweet
+                                    tweet={tweet}
+                                />
+                                <DeleteTweet
+                                    id={tweet.id}
+                                />
+                            </div> : ''}
                     </div>
                 </Paper>
             ))}

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import './App.css';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
 import SignUp from './pages/SignUp';
-import SignInContainer from './signIn/SignInContainer'
+import SignInContainer from './account/SignInContainer'
 import Toolbar from './components/Toolbar'
 
 const drawerWidth = 200;
@@ -33,9 +33,16 @@ function App() {
 
   return (
     <div>
-      <Route exact path="/signin" component={LoginContainer} />
-      <Route exact path="/signup" component={LoginContainer} />
-      <Route path="/main" component={MainContainer} />
+      {
+        (function () {
+          if (window.location.href === 'http://localhost:3000/signup') return <Route exact path="/signup" component={LoginContainer} /> 
+          else if (!localStorage.token) return <Redirect to='/signin' /> 
+        })()
+      }
+      <Switch>
+        <Route exact path="/signin" component={LoginContainer} />
+        <Route path="/main" component={MainContainer} />
+      </Switch>
     </div>
   );
 }

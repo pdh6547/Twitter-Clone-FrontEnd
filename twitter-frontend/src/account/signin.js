@@ -12,7 +12,6 @@ const initialState = {
 
 
 export const userLogin = async(user, onSetJwt, dispatch) => {
-    
     await axios.post("http://localhost:8080/api/users/login", user,
     {
         headers:
@@ -23,6 +22,7 @@ export const userLogin = async(user, onSetJwt, dispatch) => {
         .then(function (response) {
             onSetJwt({ token: response.data })
             localStorage.setItem("token", response.data)
+            localStorage.setItem("email", user.email)
             dispatch(postSignIn())
             
         })
