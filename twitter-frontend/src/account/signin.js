@@ -20,8 +20,8 @@ export const userLogin = async(user, onSetJwt, dispatch) => {
         }
     })
         .then(function (response) {
-            onSetJwt({ token: response.data })
-            localStorage.setItem("token", response.data)
+            onSetJwt({ token: response.data.token })
+            localStorage.setItem("token", response.data.token)
             localStorage.setItem("email", user.email)
             dispatch(postSignIn())
             
