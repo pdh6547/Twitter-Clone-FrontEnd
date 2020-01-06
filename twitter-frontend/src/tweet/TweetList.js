@@ -3,8 +3,10 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import UserIcon from '@material-ui/icons/AccountCircle';
-import DeleteTweet from './DeleteTweet'
-import EditTweet from './EditTweet'
+import DeleteTweet from './DeleteTweet';
+import EditTweet from './EditTweet';
+import LikeTweet from './LikeTweet';
+import ReplyIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -28,13 +30,8 @@ function TweetList({ tweets }) {
         // marginTop: '20px'
     }
     const contentStyle = {
-        float: 'left',
+        // float: 'left',
 
-    }
-    const buttonStyle = {
-        float: 'right',
-        width: '100px',
-        textAlign: 'center'
     }
     return (
         <div className={classes.root}>
@@ -51,16 +48,20 @@ function TweetList({ tweets }) {
                             {tweet.content}
                         </Typography>
                     </div>
-                    <div style={buttonStyle}>
+                    <div style={{ marginTop: '20px' }}>
+                        <>
+                            <LikeTweet id={tweet.id}/>
+                            {
+                                tweet.countLike!==0 ? <span style={{ marginLeft: '5px', float: 'left' }}>{tweet.countLike}</span> : ''
+                            }
+                        </>
+                        <ReplyIcon style={{ float: 'left', marginLeft: '10px' }} />
                         {localStorage.email === tweet.authorEmail ?
-                            <div>
-                                <EditTweet
-                                    tweet={tweet}
-                                />
-                                <DeleteTweet
-                                    id={tweet.id}
-                                />
-                            </div> : ''}
+                            <>
+                                <DeleteTweet id={tweet.id} />
+                                <EditTweet tweet={tweet} />
+                            </> : ''
+                        }
                     </div>
                 </Paper>
             ))}

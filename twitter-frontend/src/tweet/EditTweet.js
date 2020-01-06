@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { getTweets } from './tweets';
 import { tweetRedirect } from '../modules/redirect'
+import EditIcon from '@material-ui/icons/EditOutlined';
 
 
 function EditTweet(tweet) {
@@ -45,17 +46,12 @@ function EditTweet(tweet) {
     )
   }
   return (
-    <div>
-      <Button
-        style={{ margin: '5px' }}
-        type="button"
-        variant="contained"
-        color="primary"
+    <>
+      <EditIcon
+        style={{ float: 'right' }}
         tweet={tweet}
         onClick={openDialog}
-      >
-        EDIT
-      </Button>
+      />
       <Dialog open={open} onClose={closeDialog} aria-labelledby="form-dialog-title" maxWidth='md' fullWidth={true}>
         <DialogTitle>Edit</DialogTitle>
         <DialogContent>
@@ -77,7 +73,7 @@ function EditTweet(tweet) {
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </>
   )
 }
 
