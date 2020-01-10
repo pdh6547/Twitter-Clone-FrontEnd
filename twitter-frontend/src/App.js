@@ -7,8 +7,8 @@ import SignUp from './pages/SignUp';
 import Explore from './pages/Explore';
 import SignInContainer from './account/SignInContainer';
 import Toolbar from './components/Toolbar';
-import { PATH_SIGNIN, PATH_SIGNUP, PATH_HOME, PATH_PROFILE, PATH_EXPLORE } from './constants/routes';
-import Tweet from './tweet/Tweet';
+import { PATH_SIGNIN, PATH_SIGNUP, PATH_HOME, PATH_PROFILE, PATH_EXPLORE, PATH_TWEET } from './constants/routes';
+import TweetContainer from './tweet/TweetContainer';
 
 const drawerWidth = 200;
 
@@ -21,9 +21,10 @@ function App() {
         <div>
             <Toolbar />
             <div style={style} >
-                <Route path={PATH_HOME} component={Home} />
+                <Route exact path={PATH_HOME} component={Home} />
                 <Route path={PATH_PROFILE} component={Profile} />
                 <Route path={PATH_EXPLORE} component={Explore} />
+                <Route path={PATH_TWEET} component={TweetContainer} />
             </div>
         </div>
     );

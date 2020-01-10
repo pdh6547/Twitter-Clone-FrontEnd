@@ -7,6 +7,7 @@ import DeleteTweet from './DeleteTweet';
 import EditTweet from './EditTweet';
 import LikeTweet from './LikeTweet';
 import ReplyIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
     paper: {
@@ -29,10 +30,7 @@ function TweetList({ tweets }) {
         width: '67px',
         // marginTop: '20px'
     }
-    const contentStyle = {
-        // float: 'left',
 
-    }
     return (
         <div className={classes.root}>
             {tweets.map(tweet => (
@@ -40,19 +38,21 @@ function TweetList({ tweets }) {
                     <div style={iconStyle}>
                         <UserIcon color="disabled" style={{ fontSize: 50 }} />
                     </div>
-                    <div style={contentStyle}>
+                    <div >
                         <Typography component="h3">
                             {tweet.authorEmail}
                         </Typography>
-                        <Typography component="p">
-                            {tweet.content}
-                        </Typography>
+                        <Link to={`/main/home/${tweet.id}`}>
+                            <Typography component="p" >
+                                {tweet.content}
+                            </Typography>
+                        </Link>
                     </div>
                     <div style={{ marginTop: '20px' }}>
                         <>
-                            <LikeTweet id={tweet.id}/>
+                            <LikeTweet id={tweet.id} />
                             {
-                                tweet.countLike!==0 ? <span style={{ marginLeft: '5px', float: 'left' }}>{tweet.countLike}</span> : ''
+                                tweet.countLike !== 0 ? <span style={{ marginLeft: '5px', float: 'left' }}>{tweet.countLike}</span> : ''
                             }
                         </>
                         <ReplyIcon style={{ float: 'left', marginLeft: '10px' }} />
